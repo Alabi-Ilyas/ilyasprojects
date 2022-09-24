@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #cc7832;}
+.s5 { color: #629755; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">#Creating a Coffe machine</span>
+
+<span class="s1">MENU = {</span>
+    <span class="s2">&quot;espresso&quot;</span><span class="s1">: {</span>
+        <span class="s2">&quot;ingredients&quot;</span><span class="s1">: {</span>
+            <span class="s2">&quot;water&quot;</span><span class="s1">: </span><span class="s3">50</span><span class="s4">,</span>
+            <span class="s2">&quot;coffee&quot;</span><span class="s1">: </span><span class="s3">18</span><span class="s4">,</span>
+ <span class="s1">}</span><span class="s4">,</span>
+        <span class="s2">&quot;cost&quot;</span><span class="s1">: </span><span class="s3">1500</span><span class="s4">,</span>
+    <span class="s1">}</span><span class="s4">,</span>
+    <span class="s2">&quot;latte&quot;</span><span class="s1">: {</span>
+        <span class="s2">&quot;ingredients&quot;</span><span class="s1">: {</span>
+            <span class="s2">&quot;water&quot;</span><span class="s1">: </span><span class="s3">200</span><span class="s4">,</span>
+            <span class="s2">&quot;milk&quot;</span><span class="s1">: </span><span class="s3">150</span><span class="s4">,</span>
+            <span class="s2">&quot;coffee&quot;</span><span class="s1">: </span><span class="s3">24</span><span class="s4">,</span>
+        <span class="s1">}</span><span class="s4">,</span>
+        <span class="s2">&quot;cost&quot;</span><span class="s1">: </span><span class="s3">2500</span><span class="s4">,</span>
+    <span class="s1">}</span><span class="s4">,</span>
+    <span class="s2">&quot;cappuccino&quot;</span><span class="s1">: {</span>
+        <span class="s2">&quot;ingredients&quot;</span><span class="s1">: {</span>
+            <span class="s2">&quot;water&quot;</span><span class="s1">: </span><span class="s3">250</span><span class="s4">,</span>
+            <span class="s2">&quot;milk&quot;</span><span class="s1">: </span><span class="s3">100</span><span class="s4">,</span>
+            <span class="s2">&quot;coffee&quot;</span><span class="s1">: </span><span class="s3">24</span><span class="s4">,</span>
+        <span class="s1">}</span><span class="s4">,</span>
+        <span class="s2">&quot;cost&quot;</span><span class="s1">: </span><span class="s3">3000</span><span class="s4">,</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s1">profit = </span><span class="s3">0</span>
+<span class="s1">resources = {</span>
+    <span class="s2">&quot;water&quot;</span><span class="s1">: </span><span class="s3">300</span><span class="s4">,</span>
+    <span class="s2">&quot;milk&quot;</span><span class="s1">: </span><span class="s3">200</span><span class="s4">,</span>
+    <span class="s2">&quot;coffee&quot;</span><span class="s1">: </span><span class="s3">100</span><span class="s4">,</span><span class="s1">}</span>
+
+<span class="s4">def </span><span class="s1">is_resource_sufficient(order_ingredients):</span>
+    <span class="s4">for </span><span class="s1">item </span><span class="s4">in </span><span class="s1">order_ingredients:</span>
+        <span class="s4">if </span><span class="s1">order_ingredients[item] &gt;= resources[item]:</span>
+            <span class="s1">print(</span><span class="s2">&quot;Sorry there is not enough water&quot;</span><span class="s1">)</span>
+            <span class="s4">return False</span>
+    <span class="s4">return True</span>
+
+
+<span class="s4">def </span><span class="s1">process_coins():</span>
+    <span class="s5">&quot;&quot;&quot;Returns the total calculated from coins inserted.&quot;&quot;&quot;</span>
+    <span class="s1">print(</span><span class="s2">&quot;Please insert money&quot;</span><span class="s1">)</span>
+    <span class="s1">total = int(input(</span><span class="s2">&quot;how much was inserted ?&quot;</span><span class="s1">))</span>
+    <span class="s4">return </span><span class="s1">total</span>
+
+
+<span class="s4">def </span><span class="s1">is_transaction_successful(money_received</span><span class="s4">, </span><span class="s1">drink_cost):</span>
+    <span class="s4">if </span><span class="s1">money_received &gt;= drink_cost:</span>
+        <span class="s1">change = round(money_received - drink_cost</span><span class="s4">, </span><span class="s3">2</span><span class="s1">)</span>
+        <span class="s1">print(</span><span class="s2">f&quot;Here is $</span><span class="s4">{</span><span class="s1">change</span><span class="s4">} </span><span class="s2">in change.&quot;</span><span class="s1">)</span>
+        <span class="s4">global </span><span class="s1">profit</span>
+        <span class="s1">profit += drink_cost</span>
+        <span class="s4">return True</span>
+    <span class="s4">else</span><span class="s1">:</span>
+        <span class="s1">print(</span><span class="s2">&quot;Sorry that's not enough money. Money refunded.&quot;</span><span class="s1">)</span>
+        <span class="s4">return False</span>
+
+
+<span class="s4">def </span><span class="s1">make_coffee(drink_name</span><span class="s4">,</span><span class="s1">order_ingredients):</span>
+      <span class="s4">for </span><span class="s1">item </span><span class="s4">in </span><span class="s1">order_ingredients:</span>
+          <span class="s1">resources[item] -= order_ingredients[item]</span>
+      <span class="s1">print(</span><span class="s2">f&quot;here is your </span><span class="s4">{</span><span class="s1">drink_name</span><span class="s4">} </span><span class="s2">&quot;</span><span class="s1">)</span>
+
+
+
+<span class="s1">is_on = </span><span class="s4">True</span>
+
+
+
+<span class="s4">while </span><span class="s1">is_on:</span>
+   <span class="s1">choice = input(</span><span class="s2">&quot;what would you like? (espresso/latte/cappuccino):&quot;</span><span class="s1">)</span>
+   <span class="s4">if </span><span class="s1">choice == </span><span class="s2">&quot;off&quot;</span><span class="s1">:</span>
+      <span class="s1">is_on = </span><span class="s4">False</span>
+   <span class="s4">elif </span><span class="s1">choice == </span><span class="s2">&quot;report&quot;</span><span class="s1">:</span>
+      <span class="s1">print(</span><span class="s2">f&quot;Water: </span><span class="s4">{</span><span class="s1">resources[</span><span class="s2">'water'</span><span class="s1">]</span><span class="s4">}</span><span class="s2">ml&quot;</span><span class="s1">)</span>
+      <span class="s1">print(</span><span class="s2">f&quot;Milk:  </span><span class="s4">{</span><span class="s1">resources[</span><span class="s2">'milk'</span><span class="s1">]</span><span class="s4">}</span><span class="s2">ml&quot;</span><span class="s1">)</span>
+      <span class="s1">print(</span><span class="s2">f&quot;Coffee: </span><span class="s4">{</span><span class="s1">resources[</span><span class="s2">'coffee'</span><span class="s1">]</span><span class="s4">}</span><span class="s2">g&quot;</span><span class="s1">)</span>
+      <span class="s1">print(</span><span class="s2">f&quot;Money: #</span><span class="s4">{</span><span class="s1">profit</span><span class="s4">}</span><span class="s2">&quot;</span><span class="s1">)</span>
+   <span class="s4">else</span><span class="s1">:</span>
+      <span class="s1">drink = MENU[choice]</span>
+      <span class="s4">if </span><span class="s1">is_resource_sufficient(drink[</span><span class="s2">&quot;ingredients&quot;</span><span class="s1">]):</span>
+          <span class="s1">payment = process_coins()</span>
+          <span class="s4">if </span><span class="s1">is_transaction_successful(payment</span><span class="s4">, </span><span class="s1">drink[</span><span class="s2">&quot;cost&quot;</span><span class="s1">]):</span>
+              <span class="s1">make_coffee(choice</span><span class="s4">,</span><span class="s1">drink[</span><span class="s2">&quot;ingredients&quot;</span><span class="s1">])</span>
+
+</pre>
+</body>
+</html>
